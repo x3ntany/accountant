@@ -5,56 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Бухгалтер 3000</title>
     <style>
+        @font-face {
+            font-family: 'TTRuns';
+            src: url('TT-Runs-Trial-Medium.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'TTRuns', sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f0f0f0;
+            background-color: #282c34;
+            color: #ffffff;
+            overflow: hidden;
         }
         .container {
-            width: 100%;
-            max-width: 400px;
-            background-color: #fff;
+            width: 320px;
+            background-color: rgba(255, 255, 255, 0.1);
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
             text-align: center;
         }
         h1 {
-            color: #333;
+            color: #ffffff;
+            margin-bottom: 20px;
         }
         label {
             display: block;
             margin-bottom: 8px;
-            color: #666;
+            color: #bbbbbb;
             text-align: left;
         }
-        input[type="number"] {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
+        input[type="number"],
         button {
             width: 100%;
+            box-sizing: border-box;
             padding: 10px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
+            margin-bottom: 10px;
             border-radius: 4px;
+            color: #ffffff;
+            font-family: 'TTRuns', sans-serif;
+        }
+        input[type="number"] {
+            border: 1px solid #444444;
+            background-color: #2e2e2e;
+            -moz-appearance: textfield;
+        }
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        button {
+            background-color: #536878;
+            border: none;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
         button:hover {
-            background-color: #0056b3;
+            background-color: #455d6c;
         }
         .result {
             margin-top: 20px;
-            color: #333;
+            color: #ffffff;
             text-align: left;
         }
     </style>
