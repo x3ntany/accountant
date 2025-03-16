@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Бухгалтер 3000</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #666;
+            text-align: left;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            color: #333;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Бухгалтер 3000</h1>
+        <label for="income1">Доход 1 сервера:</label>
+        <input type="number" id="income1" step="0.01">
+
+        <label for="income2">Доход 2 сервера:</label>
+        <input type="number" id="income2" step="0.01">
+
+        <label for="totalTax">Общий налог:</label>
+        <input type="number" id="totalTax" step="0.01">
+
+        <button onclick="calculateIncome()">Рассчитать</button>
+
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calculateIncome() {
+            const income1 = parseFloat(document.getElementById('income1').value);
+            const income2 = parseFloat(document.getElementById('income2').value);
+            const totalTax = parseFloat(document.getElementById('totalTax').value);
+
+            const commissionRate = 0.03;
+            const taxRate = 0.06;
+
+            let netIncome1 = income1 * (1 - commissionRate);
+            let tax1 = netIncome1 * taxRate;
+            let netIncomeAfterTax1 = netIncome1 - tax1;
+
+            let netIncome2 = income2 * (1 - commissionRate);
+            let tax2 = netIncome2 * taxRate;
+            let netIncomeAfterTax2 = netIncome2 - tax2;
+
+            let calculatedTotalTax = tax1 + tax2;
+            if (calculatedTotalTax !== totalTax) {
+                const adjustmentFactor = totalTax / calculatedTotalTax;
+                tax1 *= adjustmentFactor;
+                tax2 *= adjustmentFactor;
+                netIncomeAfterTax1 = netIncome1 - tax1;
+                netIncomeAfterTax2 = netIncome2 - tax2;
+            }
+
+            document.getElementById('result').innerHTML = `
+                <p>Первый сервер:</p>
+                <ul>
+                    <li>Прибыль: ${netIncomeAfterTax1.toFixed(2)}</li>
+                    <li>Налог: ${tax1.toFixed(2)}</li>
+                </ul>
+                <p>Второй сервер:</p>
+                <ul>
+                    <li>Прибыль: ${netIncomeAfterTax2.toFixed(2)}</li>
+                    <li>Налог: ${tax2.toFixed(2)}</li>
+                </ul>
+            `;
+        }
+    </script>
+</body>
+</html>
