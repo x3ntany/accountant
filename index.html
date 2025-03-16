@@ -93,8 +93,8 @@
         <label for="income2">Доход 2 сервера:</label>
         <input type="number" id="income2" step="0.01">
 
-        <label for="totalTax">Общий налог:</label>
-        <input type="number" id="totalTax" step="0.01">
+        <label for="taxRate">Процент налога (%):</label>
+        <input type="number" id="taxRate" step="0.01">
 
         <button onclick="calculateIncome()">Рассчитать</button>
 
@@ -103,40 +103,31 @@
 
     <script>
         function calculateIncome() {
-            const income1 = parseFloat(document.getElementById('income1').value);
-            const income2 = parseFloat(document.getElementById('income2').value);
-            const totalTax = parseFloat(document.getElementById('totalTax').value);
+            const income1 = parseFloat(document.getElementById('income1').value) || 0;
+            const income2 = parseFloat(document.getElementById('income2').value) || 0;
+            const taxRate = parseFloat(document.getElementById('taxRate').value) || 0;
 
             const commissionRate = 0.03;
-            const taxRate = 0.06;
+            const taxRateDecimal = taxRate / 100;
 
             let netIncome1 = income1 * (1 - commissionRate);
-            let tax1 = netIncome1 * taxRate;
+            let tax1 = netIncome1 * taxRateDecimal;
             let netIncomeAfterTax1 = netIncome1 - tax1;
 
             let netIncome2 = income2 * (1 - commissionRate);
-            let tax2 = netIncome2 * taxRate;
+            let tax2 = netIncome2 * taxRateDecimal;
             let netIncomeAfterTax2 = netIncome2 - tax2;
-
-            let calculatedTotalTax = tax1 + tax2;
-            if (calculatedTotalTax !== totalTax) {
-                const adjustmentFactor = totalTax / calculatedTotalTax;
-                tax1 *= adjustmentFactor;
-                tax2 *= adjustmentFactor;
-                netIncomeAfterTax1 = netIncome1 - tax1;
-                netIncomeAfterTax2 = netIncome2 - tax2;
-            }
 
             document.getElementById('result').innerHTML = `
                 <p>Первый сервер:</p>
                 <ul>
-                    <li>Прибыль: ${netIncomeAfterTax1.toFixed(2)} ₽</li>
-                    <li>Налог: ${tax1.toFixed(2)} ₽</li>
+                    <li>Прибыль: ${netIncomeAfterTax1.toFixed(2)}₽</li>
+                    <li>Налог: ${tax1.toFixed(2)}₽</li>
                 </ul>
                 <p>Второй сервер:</p>
                 <ul>
-                    <li>Прибыль: ${netIncomeAfterTax2.toFixed(2)} ₽</li>
-                    <li>Налог: ${tax2.toFixed(2)} ₽</li>
+                    <li>Прибыль: ${netIncomeAfterTax2.toFixed(2)}₽</li>
+                    <li>Налог: ${tax2.toFixed(2)}₽</li>
                 </ul>
             `;
         }
