@@ -22,6 +22,7 @@
             background-color: #f5f5f7;
             color: #333;
             overflow: hidden;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         .container {
@@ -31,6 +32,7 @@
             border-radius: 12px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             text-align: center;
+            transition: background-color 0.3s, box-shadow 0.3s;
         }
 
         h1 {
@@ -55,6 +57,7 @@
             border: 1px solid #d1d1d6;
             color: #1d1d1f;
             font-family: inherit;
+            transition: background-color 0.3s, border-color 0.3s, color 0.3s;
         }
 
         input[type="number"] {
@@ -84,6 +87,40 @@
             margin-top: 20px;
             color: #1d1d1f;
             text-align: left;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #1c1c1e;
+                color: #f5f5f5;
+            }
+
+            .container {
+                background-color: #2c2c2e;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            }
+
+            h1, .result {
+                color: #f5f5f5;
+            }
+
+            label {
+                color: #c7c7cc;
+            }
+
+            input[type="number"] {
+                background-color: #3a3a3c;
+                border-color: #48484a;
+                color: #f5f5f5;
+            }
+
+            button {
+                background-color: #0a84ff;
+            }
+
+            button:hover {
+                background-color: #0060df;
+            }
         }
     </style>
 </head>
